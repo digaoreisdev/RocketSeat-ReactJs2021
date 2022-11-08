@@ -10,13 +10,14 @@ import styles from './Post.module.css';
 // publishedAt: Date
 // content: String
 
-export function Post({ author, publishedAt }) {
-  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+export function Post({ author, publishedAt, content }) {
+  const publishedDateFormatted = format(publishedAt, "dd 'de' LLLL 'às' HH:mm'hs'", {
     locale: ptBR,
   })
 
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
     locale: ptBR,
+    addSuffix: true,
   })
 
   return (
@@ -30,13 +31,19 @@ export function Post({ author, publishedAt }) {
           </div>
         </div>
 
-        <time title={publishedDateFormatted} dateTime="2022-05-11 08:13:30">
+        <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
           {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={ styles.content }>
-        
+        {content.map(line => {
+          if (line.type === 'paragraph') {
+            return <p>{line.content}</p>;
+          } else if (line.type === 'link') {
+            return <p> <a href="">{line.content}</a> </p>
+          }
+        })}
       </div>
 
       <form className={ styles.commentForm }>
