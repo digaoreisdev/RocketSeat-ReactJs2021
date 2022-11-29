@@ -25,18 +25,6 @@ import {
 import { NewCycleForm } from "./components/NewCyclesForm";
 import { Countdown } from "./components/Countdown";
 
-// controlled / unControlled
-
-/**
-* function register(name: string) {
-*   return {
-*     onChange: () => void,  
-*     onBlur: () => void,  
-*     onFocus: () => void,
-*   }
-* }
-*/
-
 interface Cycle {
   id: string;
   task: string;
