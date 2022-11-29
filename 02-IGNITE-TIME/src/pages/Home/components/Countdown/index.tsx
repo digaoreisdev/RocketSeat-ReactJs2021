@@ -1,5 +1,5 @@
 import { differenceInSeconds } from "date-fns";
-import { CycleContext } from "../..";
+import { CycleContext } from "../../../../contexts/CyclesContext";
 
 import {
   useContext,
