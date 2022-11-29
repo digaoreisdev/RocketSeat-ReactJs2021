@@ -1,7 +1,8 @@
-import { CircleWavyCheck } from 'phosphor-react';
 import { useContext } from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import { CyclesContext } from '../../contexts/CyclesContext'
-import { HistoryContainer, HistoryList, Status } from "./styles";
+import { HistoryContainer, HistoryList, Status } from "./styles"
 
 export function History() {
   const { cycles } = useContext(CyclesContext)
@@ -25,8 +26,13 @@ export function History() {
               return (
                 <tr key={cycle.id}>
                   <td>{cycle.task}</td>
-                  <td>{cycle.minutesAmount}</td>
-                  <td>{cycle.startDate.toISOString()}</td>
+                  <td>{cycle.minutesAmount} minutos</td>
+                  <td>
+                    {formatDistanceToNow(cycle.startDate, {
+                      addSuffix: true,
+                      locale: ptBR,
+                    })}
+                  </td>  
                   <td>
                     { cycle.finishedDate && (
                       <Status statusColor="green">Concluido</Status>
