@@ -11,7 +11,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod';
 
-import {useContext} from "react";
+import { useContext } from "react";
 
 import {
   HomeContainer,
@@ -21,7 +21,7 @@ import {
 
 import { NewCycleForm } from "./components/NewCyclesForm";
 import { Countdown } from "./components/Countdown";
-import { CycleContext } from "../../contexts/CyclesContext";
+import { CyclesContext } from "../../contexts/CyclesContext";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa a ser executada'),
@@ -34,7 +34,8 @@ const newCycleFormValidationSchema = zod.object({
 type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
-  const {activeCycle, CreateNewCycle, interruptCurrentCycle} = useContext(CycleContext)
+  const { activeCycle, createNewCycle, interruptCurrentCycle } = useContext(CyclesContext)
+  useContext(CyclesContext)
 
   const newCycleForm = useForm<NewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
@@ -43,21 +44,21 @@ export function Home() {
       minutesAmount: 0,
     }
   })
-  
-  const { handleSubmit, watch, /*reset*/ } = newCycleForm  
-  
+
+  const { handleSubmit, watch, /*reset*/ } = newCycleForm
+
   const task = watch('task')
   const isSubmitDisable = !task;
-  
+
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(CreateNewCycle)} action="">
+      <form onSubmit={handleSubmit(createNewCycle)} action="">
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
-        
-        <Countdown />        
-        
+
+        <Countdown />
+
         {activeCycle ? (
           <StopCountdownButton onClick={interruptCurrentCycle} type="button">
             <HandPalm size={24} />
