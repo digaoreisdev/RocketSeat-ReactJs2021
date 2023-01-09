@@ -1,46 +1,47 @@
-import {css} from "styled-components";
-import styled from "styled-components";
+import styled, { css } from 'styled-components'
 
 export const SummaryContainer = styled.section`
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  
+
   margin-top: -5rem;
-`;
+`
 
 /*
-** Criamos uma interface com a propriedade variant, para poder colocar propriedades nos cards.
-** Criamos nesta interface e proprieade variant, para se ela estiver ativa no card, acrescentar a cor green.
-*/
+ ** Criamos uma interface com a propriedade variant, para poder colocar propriedades nos cards.
+ ** Criamos nesta interface e proprieade variant, para se ela estiver ativa no card, acrescentar a cor green.
+ */
 interface SummaryCardProps {
-  variant?: 'green';
+  variant?: 'green'
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
-  background: ${props => props.theme["gray-600"]};
+  background: ${(props) => props.theme['gray-600']};
   border-radius: 6px;
   padding: 2rem;
-  
+
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: ${props => props.theme["gray-300"]};
+    color: ${(props) => props.theme['gray-300']};
   }
-  
+
   strong {
     display: block; /* Colocamos Block no strong, para poder usar margens */
     margin-top: 1rem;
     font-size: 2rem;
   }
-  
-  ${props => props.variant === 'green' && css`
-    background: ${props => props.theme["green-700"]};
-  `}
-`;
+
+  ${(props) =>
+    props.variant === 'green' &&
+    css`
+      background: ${(props) => props.theme['green-700']};
+    `}
+`
